@@ -10,24 +10,9 @@ namespace first_see_sharp
         //entry point method
         static void Main(string[] args)
         {
-            // set app vars
-            string appName = "Number Guesser";
-            string appVersion = "1.0.0";
-            string appAuthor = "Seth Mcfeeters";
+            GetAppInfo();
 
-
-            //change text color
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("App titile: {0}. App Version: {1}. App Author: {2}.", appName, appVersion, appAuthor);
-            Console.ResetColor();
-
-            //ask users name
-            Console.WriteLine("What is your name?");
-
-            string inputName = Console.ReadLine();
-
-            Console.WriteLine("Hello {0}, lets play a game...", inputName);
-
+            Greet();
             //set correct number
             //int correctNumber = 7;
 
@@ -49,9 +34,7 @@ namespace first_see_sharp
 
                     if (!int.TryParse(input, out guess))
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("You must enter a number");
-                        Console.ResetColor();
+                        PrintColor(ConsoleColor.Red, "You must enter a number");
                         continue;
                     }
 
@@ -81,9 +64,49 @@ namespace first_see_sharp
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("You guessed it! {0} was the number!", correctNumber);
                         Console.ResetColor();
+                        Console.WriteLine("would you like to play agin? [y or n]");
+                        string answer = Console.ReadLine();
+                        if (answer == "y")
+                        {
+                            continue;
+                        }
+                        if (answer == "n")
+                        {
+                            return;
+                        }
                     }
                 }
             }
+
+        }
+
+        static void GetAppInfo()
+        {
+                // set app vars
+            string appName = "Number Guesser";
+            string appVersion = "1.0.0";
+            string appAuthor = "Seth Mcfeeters";
+
+
+            //change text color
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("App titile: {0}. App Version: {1}. App Author: {2}.", appName, appVersion, appAuthor);
+            Console.ResetColor();
+        }
+
+        static void Greet()
+        {
+            Console.WriteLine("What is your name?");
+            string inputName = Console.ReadLine();
+            Console.WriteLine("Hello {0}, lets play a game...", inputName);
+        }
+
+        static void PrintColor(ConsoleColor color, string message)
+        {
+            Console.ForegroundColor = color;
+            Console.WriteLine(message);
+            Console.ResetColor();
         }
     }
+   
 }
